@@ -4,15 +4,17 @@ def max_subarray_sum(arr):
     starting_index = 0
     ending_index = 0
     for i in range(len(arr)):
-        if arr[i] < max_ending_here:
+        change_starting_index = False
+        if arr[i] < (max_ending_here + arr[i]):
             max_ending_here = max_ending_here + arr[i]
         else:
             max_ending_here = arr[i]
+            change_starting_index = True
         if max_ending_here > max_so_far:
-            if arr[i] >= max_ending_here:
+            max_so_far = max_ending_here
+            if change_starting_index:
                 starting_index = i
             ending_index = i
-            max_so_far = max_ending_here
     print(f"\n     input array:   {arr}")
     print(f"\n    max subarray:   {arr[starting_index:ending_index+1]}")
     print(f"max subarray sum:   {max_so_far}")
